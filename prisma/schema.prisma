@@ -14,3 +14,19 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Components {
+  componentId Int @id @default(autoincrement())
+  componentName String
+  componentDescription String?
+  adviceId Int?
+  advice Advices? @relation( fields: [adviceId], references: [adviceId], onDelete: SetNull)
+}
+
+model Advices {
+  adviceId Int @id @default(autoincrement())
+  advice String
+  component Components[]
+}
+
+
