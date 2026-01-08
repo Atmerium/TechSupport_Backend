@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
 
 export class CreateComponentDto {
     @IsString()
@@ -12,4 +12,8 @@ export class CreateComponentDto {
     @IsOptional()
     @IsNumber()
     adviceId: number
+
+    @IsOptional()
+    @IsBoolean()
+    adviceVisible: boolean
 }

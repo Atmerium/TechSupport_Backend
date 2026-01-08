@@ -20,12 +20,14 @@ model Components {
   componentName String
   componentDescription String?
   adviceId Int?
+  componentVisible Boolean? @default(true)
   advice Advices? @relation( fields: [adviceId], references: [adviceId], onDelete: SetNull)
 }
 
 model Advices {
   adviceId Int @id @default(autoincrement())
   adviceContent String
+  adviceVisible Boolean? @default(true)
   component Components[]
 }
 
@@ -34,4 +36,5 @@ model Users {
   userEmail String
   userPassword String
   userRememberMe Boolean @default(false)
+  userVisible Boolean? @default(true)
 }
