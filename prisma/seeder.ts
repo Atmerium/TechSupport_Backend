@@ -1,12 +1,14 @@
 import { PrismaClient } from "../generated/prisma/client"
+import {faker} from "@faker-js/faker"
 import dotenv from 'dotenv'
+
 const prisma = new PrismaClient()
 
 dotenv.config();
 
-async function main() {
-  
-}
+console.log("seeding...")
+
+
 
 main()
   .then(async () => {
