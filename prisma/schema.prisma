@@ -21,8 +21,10 @@ model components {
   componentName        String
   componentDescription String?
   adviceId             Int?
+  categoryId Int?
   componentVisible     Boolean? @default(true)
   advices              advices? @relation(fields: [adviceId], references: [adviceId], map: "Components_adviceId_fkey")
+  categories categories? @relation(fields: [categoryId], references: [categoryId])
 
   @@index([adviceId], map: "Components_adviceId_fkey")
 }
@@ -33,4 +35,11 @@ model users {
   userPassword   String
   userRememberMe Boolean  @default(false)
   userVisible    Boolean? @default(true)
+}
+
+model categories {
+  categoryId Int @id @default(autoincrement())
+  categoryName String
+  categoryVisible Boolean? @default(true)
+  components components[]
 }
