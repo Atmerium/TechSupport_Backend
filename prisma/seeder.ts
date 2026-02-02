@@ -29,7 +29,7 @@ const main = async () => {
 
     await prisma.advices.create({
       data: {
-        adviceContent: faker.lorem.text(),
+        adviceContent: faker.lorem.slug(),
         adviceVisible: false
       }
     })
