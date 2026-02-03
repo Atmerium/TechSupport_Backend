@@ -1,17 +1,13 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator"
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator"
 
 export class CreateComponentDto {
     @IsString()
     @IsNotEmpty()
-    componentName: string
+    componentBrand: string
     
     @IsString()
     @IsOptional()
     componentDecription: string
-    
-    @IsOptional()
-    @IsNumber()
-    adviceId: number
 
     @IsOptional()
     @IsBoolean()

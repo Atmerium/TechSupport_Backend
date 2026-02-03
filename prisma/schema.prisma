@@ -9,20 +9,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model advices {
-//   adviceId      Int          @id @default(autoincrement())
-//   adviceContent String
-//   adviceVisible Boolean?     @default(true)
-//   components    components[]
-// }
-
 model components {
   componentId          Int      @id @default(autoincrement())
   componentBrand        String
   componentDescription String?
   categoryId Int?
   componentVisible     Boolean? @default(true)
-  // advices              advices? @relation(fields: [adviceId], references: [adviceId], map: "Components_adviceId_fkey")
   categories categories? @relation(fields: [categoryId], references: [categoryId])
 }
 
