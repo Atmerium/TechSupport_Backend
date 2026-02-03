@@ -19,33 +19,24 @@ const main = async () => {
       }
     })
 
-    await prisma.components.create({
-      data: {
-        componentName: faker.commerce.productName(),
-        componentDescription: faker.commerce.productDescription(),
-        adviceId: faker.number.int({
-          min: 1,
-          max: 15
-        }),
-        categoryId: faker.number.int({
-          min:1,
-          max: 15
-        }),
-        componentVisible: false
-      }
-    })
-
     await prisma.categories.create({
       data: {
         categoryName: faker.lorem.slug(),
         categoryVisible: false
       }
     })
+  }
 
-    await prisma.advices.create({
-      data: {
-        adviceContent: faker.lorem.slug(),
-        adviceVisible: false
+  for (let i = 0; i < 15; i++) {
+         await prisma.components.create({
+        data: {
+          componentBrand: faker.commerce.productName(),
+          componentDescription: faker.commerce.productDescription(),
+          categoryId: faker.number.int({
+          min:1,
+          max: 15
+        }),
+        componentVisible: false
       }
     })
   }
