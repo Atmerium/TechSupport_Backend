@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import path from 'path';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -21,7 +22,21 @@ async function bootstrap() {
 
   app.setViewEngine('ejs');
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+    transform: true,
+    forbidNonWhitelisted: true
+  }));
+
+  const config = new DocumentBuilder()
+  .setTitle("TechSupport Categories API")
+  .setDescription("TechSupport backend NestJS + Prisma + Swagger")
+  .setVersion("0.5.0")
+  .addTag("categories")
+  .build()
+
+  const document = SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup("api", app, document)
 
   await app.listen(process.env.PORT ?? 3000);
 }

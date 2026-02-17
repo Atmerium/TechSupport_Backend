@@ -16,7 +16,7 @@ export class CategoriesService {
   }
 
   findOne(id: number) {
-    return this.prisma.categories.findUnique({where: {categoryId: id}});
+    return this.prisma.categories.findUnique({where: { categoryId: id}});
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
