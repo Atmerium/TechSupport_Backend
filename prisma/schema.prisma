@@ -20,7 +20,7 @@ model components {
 
 model users {
   userId         Int      @id @default(autoincrement())
-  userEmail      String
+  userEmail      String   @unique
   userPassword   String
   userRole       String   @default("user")
   userRememberMe Boolean  @default(false)

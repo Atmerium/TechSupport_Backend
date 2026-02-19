@@ -9,16 +9,7 @@ const prisma = new PrismaClient()
 console.log("seeding...")
 
 const main = async () => {
-  for (let i = 0; i < 15; i++) {
-    await prisma.users.create({
-      data: {
-        userEmail: faker.internet.email(),
-        userPassword: faker.internet.password(),
-        userRememberMe: faker.datatype.boolean(),
-        userVisible: false
-      }
-    })
-
+  for (let i = 0; i < 5; i++) {
     await prisma.categories.create({
       data: {
         categoryName: faker.lorem.slug(),
@@ -27,7 +18,7 @@ const main = async () => {
     })
   }
 
-  for (let i = 0; i < 15; i++) {
+  for (let i = 0; i < 5; i++) {
          await prisma.components.create({
         data: {
           componentBrand: faker.commerce.productName(),

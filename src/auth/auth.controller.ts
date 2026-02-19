@@ -9,12 +9,12 @@ import { AuthGuard } from '@nestjs/passport'
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService,
-    private readonly userService: UsersService
+    private readonly usersService: UsersService
   ) {}
 
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
-    const user = await this.userService.findByEmail(loginDto.userEmail)
+    const user = await this.usersService.findByEmail(loginDto.userEmail)
     if (user === null) {
       throw new ForbiddenException('Invalid email or password')
     }
@@ -22,7 +22,7 @@ export class AuthController {
       throw new ForbiddenException('Invalid email or password')
     }
     return {
-      token: await this.userService.createToken(user.userId)
+      token: await this.usersService.createToken(user.userId)
     }
   }
 

@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags("categories")
 @Controller('categories')
@@ -10,6 +11,7 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Post()
+  @UseGuards(AuthGuard('bearer'))
   @ApiOperation({summary: "Kategória hozzáadása"})
   @ApiBody({type: CreateCategoryDto})
   @ApiResponse({status: 200, description:"Kategória sikeresen létrehozva"})
@@ -33,6 +35,7 @@ export class CategoriesController {
     return this.categoriesService.findOne(+id);
   }
 
+  @UseGuards(AuthGuard('bearer'))
   @Patch(':id')
   @ApiOperation({summary: "Kategória módosítása"})
   @ApiBody({type: UpdateCategoryDto})
@@ -43,6 +46,7 @@ export class CategoriesController {
   }
 
   //This probably shouldn't be used
+  @UseGuards(AuthGuard('bearer'))
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(+id);

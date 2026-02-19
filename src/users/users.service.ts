@@ -12,8 +12,7 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const newUser = {
       ...createUserDto,
-      role: "user",
-      password: await argon2.hash(createUserDto.userPassword)
+      userPassword: await argon2.hash(createUserDto.userPassword)
     }
     return this.prisma.users.create({data: newUser, omit: {
       userPassword: true
@@ -29,6 +28,7 @@ export class UsersService {
           connect: {userId: id}
         }}
     })
+    return newToken
   }
 
   findByEmail(email: string) {

@@ -13,6 +13,10 @@ export class CreateUserDto {
   @IsOptional()
   userRememberMe: boolean
 
+  @IsString()
+  @IsOptional()
+  userRole: string
+
   @IsBoolean()
   @IsOptional()
   userVisible: boolean

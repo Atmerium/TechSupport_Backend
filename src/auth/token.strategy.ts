@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { ForbiddenException, Injectable } from "@nestjs/common";
-import { PassportStrategy } from '@nestjs/passport'
-import { Strategy } from "passport-local";
+import { PassportStrategy } from '@nestjs/passport';
+import { Strategy } from "passport-http-bearer";
 import { PrismaService } from "src/prisma.service";
 
 @Injectable()
 export class TokenStrategy extends PassportStrategy(Strategy) {
     constructor(private readonly prisma: PrismaService) {
-        super()
+        super();
     }
 
     async validate(token: string) {
