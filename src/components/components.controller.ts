@@ -27,6 +27,7 @@ export class ComponentsController {
     return this.componentsService.update(+id, updateComponentDto);
   }
 
+  //This probalby shouldn't be used
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.componentsService.remove(+id);

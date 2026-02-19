@@ -17,9 +17,11 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
   });
 
+  //This is unneccesary
   app.useStaticAssets(path.join(__dirname, '..', '..', 'public'));
   app.setBaseViewsDir(path.join(__dirname, '..', '..', 'views'));
 
+  //This one too
   app.setViewEngine('ejs');
 
   app.useGlobalPipes(new ValidationPipe({
@@ -31,11 +33,11 @@ async function bootstrap() {
   const config = new DocumentBuilder()
   .setTitle("TechSupport Categories API")
   .setDescription("TechSupport backend NestJS + Prisma + Swagger")
-  .setVersion("0.5.0")
+  .setVersion("0.6.0")
   .addTag("categories")
   .build()
 
-  const document = SwaggerModule.createDocument(app, config)
+  const document = () => SwaggerModule.createDocument(app, config)
   SwaggerModule.setup("api", app, document)
 
   await app.listen(process.env.PORT ?? 3000);

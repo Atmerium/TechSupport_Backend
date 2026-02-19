@@ -23,6 +23,7 @@ export class CategoriesService {
     return this.prisma.categories.update({where: {categoryId: id}, data: updateCategoryDto});
   }
 
+  //This one probably shouldn't be used
   remove(id: number) {
     return this.prisma.categories.delete({where: {categoryId: id}});
   }

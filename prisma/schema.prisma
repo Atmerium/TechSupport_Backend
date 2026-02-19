@@ -10,25 +10,33 @@ datasource db {
 }
 
 model components {
-  componentId          Int      @id @default(autoincrement())
-  componentBrand        String
+  componentId          Int         @id @default(autoincrement())
+  componentBrand       String
   componentDescription String?
-  categoryId Int?
-  componentVisible     Boolean? @default(true)
-  categories categories? @relation(fields: [categoryId], references: [categoryId])
+  categoryId           Int?
+  componentVisible     Boolean?    @default(true)
+  categories           categories? @relation(fields: [categoryId], references: [categoryId])
 }
 
 model users {
   userId         Int      @id @default(autoincrement())
   userEmail      String
   userPassword   String
+  userRole       String   @default("user")
   userRememberMe Boolean  @default(false)
   userVisible    Boolean? @default(true)
+  tokens token[]
+}
+
+model token {
+  token String @id
+  user users @relation(fields: [userId], references: [userId], onDelete: Cascade)
+  userId Int
 }
 
 model categories {
-  categoryId Int @id @default(autoincrement())
-  categoryName String
-  categoryVisible Boolean? @default(true)
-  components components[]
+  categoryId      Int          @id @default(autoincrement())
+  categoryName    String
+  categoryVisible Boolean?     @default(true)
+  components      components[]
 }

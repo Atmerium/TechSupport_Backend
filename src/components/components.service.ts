@@ -23,6 +23,7 @@ export class ComponentsService {
     return this.prisma.components.update({where: {componentId: id}, data: updateComponentDto});
   }
 
+  //This one probably shouldn't be used
   remove(id: number) {
     return this.prisma.components.delete({where: {componentId: id}});
   }
