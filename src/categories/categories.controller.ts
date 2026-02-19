@@ -38,6 +38,7 @@ export class CategoriesController {
   @UseGuards(AuthGuard('bearer'))
   @Patch(':id')
   @ApiOperation({summary: "Kategória módosítása"})
+  @ApiParam({name: "id", example: 1})
   @ApiBody({type: UpdateCategoryDto})
   @ApiResponse({status: 200, description:"Kategória sikeresen módosítva"})
   @ApiResponse({status: 400, description:"Hibásan megadott adatok"})
@@ -48,6 +49,7 @@ export class CategoriesController {
   //This probably shouldn't be used
   @UseGuards(AuthGuard('bearer'))
   @Delete(':id')
+  @ApiOperation({summary: "Kategória törlése (Frontend álltal nem használt)"})
   remove(@Param('id') id: string) {
     return this.categoriesService.remove(+id);
   }

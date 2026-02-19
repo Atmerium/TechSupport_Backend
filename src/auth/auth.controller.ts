@@ -5,7 +5,9 @@ import { UsersService } from 'src/users/users.service';
 import * as argon2 from "argon2"
 import { users } from "generated/prisma/client"
 import { AuthGuard } from '@nestjs/passport'
+import { ApiExcludeController } from '@nestjs/swagger';
 
+@ApiExcludeController()
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService,
