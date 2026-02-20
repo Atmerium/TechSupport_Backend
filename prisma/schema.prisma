@@ -9,13 +9,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model components {
-  componentId          Int         @id @default(autoincrement())
-  componentBrand       String
-  componentDescription String?
-  categoryId           Int?
-  componentVisible     Boolean?    @default(true)
-  categories           categories? @relation(fields: [categoryId], references: [categoryId])
+model brands {
+  brandId          Int         @id @default(autoincrement())
+  brandName        String
+  brandDescription String?     @db.Text
+  partId           Int?
+  brandVisible     Boolean?    @default(true)
+  part             parts?      @relation(fields: [partId], references: [partId])
 }
 
 model users {
@@ -34,9 +34,10 @@ model token {
   userId Int
 }
 
-model categories {
-  categoryId      Int          @id @default(autoincrement())
-  categoryName    String
-  categoryVisible Boolean?     @default(true)
-  components      components[]
+model parts {
+  partId          Int      @id @default(autoincrement())
+  partName        String
+  partDescription String?  @db.Text
+  partVisible     Boolean? @default(true)
+  brands          brands[]
 }

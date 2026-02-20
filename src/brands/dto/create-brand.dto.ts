@@ -1,15 +1,15 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator"
 
-export class CreateComponentDto {
+export class CreateBrandDto {
     @IsString()
     @IsNotEmpty()
-    componentBrand: string
+    brandName: string
     
     @IsString()
     @IsOptional()
-    componentDecription: string
+    brandDescription: string
 
     @IsOptional()
     @IsBoolean()
-    adviceVisible: boolean
+    brandVisible: boolean
 }

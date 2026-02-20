@@ -1,11 +1,11 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator"
 
-export class CreateCategoryDto {
+export class CreatePartDto {
     @IsString()
     @IsNotEmpty()
-    categoryName: string
+    partName: string
     
     @IsBoolean()
     @IsOptional()
-    categoryVisible: boolean
+    partVisible: boolean
 }

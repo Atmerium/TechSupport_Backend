@@ -10,24 +10,24 @@ console.log("seeding...")
 
 const main = async () => {
   for (let i = 0; i < 5; i++) {
-    await prisma.categories.create({
+    await prisma.parts.create({
       data: {
-        categoryName: faker.lorem.slug(),
-        categoryVisible: false
+        partName: faker.lorem.slug(),
+        partVisible: false
       }
     })
   }
 
   for (let i = 0; i < 5; i++) {
-         await prisma.components.create({
+         await prisma.brands.create({
         data: {
-          componentBrand: faker.commerce.productName(),
-          componentDescription: faker.commerce.productDescription(),
-          categoryId: faker.number.int({
+          brandName: faker.commerce.productName(),
+          brandDescription: faker.commerce.productDescription(),
+          partId: faker.number.int({
           min:1,
           max: 15
         }),
-        componentVisible: false
+        brandVisible: false
       }
     })
   }
