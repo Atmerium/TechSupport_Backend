@@ -41,3 +41,10 @@ model parts {
   partVisible     Boolean? @default(true)
   brands          brands[]
 }
+
+model builds {
+  buildId          Int      @id @default(autoincrement())
+  buildName        String
+  buildDescription String?  @db.Text
+  buildVisible     Boolean? @default(true)
+}
