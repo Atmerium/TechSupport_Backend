@@ -6,11 +6,12 @@ import { BrandsModule } from './brands/brands.module';
 import { UsersModule } from './users/users.module';
 import { PartsModule } from './parts/parts.module';
 import { AuthModule } from './auth/auth.module';
+import { BuildsModule } from './builds/builds.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
-  }), BrandsModule, UsersModule, PartsModule, AuthModule],
+  }), BrandsModule, UsersModule, PartsModule, AuthModule, BuildsModule],
   controllers: [AppController],
   providers: [AppService],
 })
