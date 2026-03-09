@@ -34,9 +34,10 @@ async function bootstrap() {
   .setTitle("TechSupport Categories API")
   .setDescription("TechSupport backend NestJS + Prisma + Swagger")
   .setVersion("0.6.0")
-  .addTag("categories")
-  .addTag("components")
+  .addTag("parts")
+  .addTag("brands")
   .addTag("users")
+  .addTag("builds")
   .build()
 
   const document = () => SwaggerModule.createDocument(app, config)

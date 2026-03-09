@@ -39,6 +39,7 @@ export class BrandsController {
   @Patch(':id')
   @ApiOperation({summary: "Márka módosítása"})
   @ApiParam({name: "id", example: 1})
+  @ApiBody({type: UpdateBrandDto})
   @ApiResponse({status: 200, description: "Márka sikeresen módosítva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
   update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
