@@ -25,7 +25,7 @@ const main = async () => {
           brandDescription: faker.commerce.productDescription(),
           partId: faker.number.int({
           min:1,
-          max: 15
+          max: 5
         }),
         brandVisible: false
       }
