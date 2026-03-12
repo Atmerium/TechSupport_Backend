@@ -50,3 +50,14 @@ model builds {
   buildCategory    Int     @default(1)
   buildClass       Int?  @default(1)
 }
+
+model comments{
+  commentId        Int      @id @default(autoincrement())
+  commentContent   String?  @db.Text
+  commentVisible   Boolean? @default(true)
+  commentDate      DateTime @default(now())
+  buildId         Int
+  userId          Int
+  builds           builds   @relation(fields: [buildId], references: [buildId], onDelete: Cascade)
+  users            users    @relation(fields: [userId], references: [userId], onDelete: Cascade)
+}
