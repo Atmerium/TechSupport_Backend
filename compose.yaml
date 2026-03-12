@@ -1,3 +1,6 @@
 services:
   db:
-    image: imageName
+    image: postgres:18
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_DB: db
