@@ -10,8 +10,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class PartsController {
   constructor(private readonly partsService: PartsService) {}
 
-  @Post()
   @UseGuards(AuthGuard('bearer'))
+  @Post()
   @ApiOperation({summary: "Alkatrész hozzáadása"})
   @ApiBody({type: CreatePartDto})
   @ApiResponse({status: 200, description:"Alkatrész sikeresen létrehozva"})
