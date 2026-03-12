@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:18
+    image: mysql:latest
     environment:
       POSTGRES_USER: root
-      POSTGRES_DB: db
+      POSTGRES_DB: localhost
