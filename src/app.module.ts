@@ -7,11 +7,12 @@ import { UsersModule } from './users/users.module';
 import { PartsModule } from './parts/parts.module';
 import { AuthModule } from './auth/auth.module';
 import { BuildsModule } from './builds/builds.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [ConfigModule.forRoot({
     isGlobal: true,
-  }), BrandsModule, UsersModule, PartsModule, AuthModule, BuildsModule],
+  }), BrandsModule, UsersModule, PartsModule, AuthModule, BuildsModule, CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
