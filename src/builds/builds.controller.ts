@@ -39,6 +39,7 @@ export class BuildsController {
   @Patch(':id')
   @ApiOperation({summary: "Számítógép módosítása"})
   @ApiParam({name: "id", example: 1})
+  @ApiBody({type: CreateBuildDto})
   @ApiResponse({status: 200, description: "Számítógép sikeresen módosítva"})
   @ApiResponse({status: 404, description: "Számítógép nem található"})
   update(@Param('id') id: string, @Body() updateBuildDto: UpdateBuildDto) {

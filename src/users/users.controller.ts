@@ -40,7 +40,7 @@ export class UsersController {
   @Patch(':id')
   @ApiOperation({summary: "Felhasználó módosítása id alapján"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: UpdateUserDto})
+  @ApiBody({type: CreateUserDto})
   @ApiResponse({status: 200, description: "Felhasználó sikeresen módosítva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
   @ApiResponse({status: 404, description: "Felhasználó nem található"})

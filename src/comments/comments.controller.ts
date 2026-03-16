@@ -47,7 +47,6 @@ export class CommentsController {
   @Patch(':id')
   @ApiOperation({summary: "Komment módosítása"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: UpdateCommentDto})
   @ApiResponse({status: 200, description: "Komment sikeresen módosítva"})
   @ApiResponse({status: 404, description: "Komment nem található"})
   update(@Param('id') id: string, @Body() updateCommentDto: UpdateCommentDto) {

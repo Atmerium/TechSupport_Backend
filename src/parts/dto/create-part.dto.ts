@@ -8,6 +8,11 @@ export class CreatePartDto {
     partName: string
     
     @ApiProperty()
+    @IsString()
+    @IsOptional()
+    partDescription: string
+
+    @ApiProperty()
     @IsBoolean()
     @IsOptional()
     partVisible: boolean

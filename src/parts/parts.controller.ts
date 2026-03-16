@@ -39,7 +39,7 @@ export class PartsController {
   @Patch(':id')
   @ApiOperation({summary: "Alkatrész módosítása"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: UpdatePartDto})
+  @ApiBody({type: CreatePartDto})
   @ApiResponse({status: 200, description:"Alkatrész sikeresen módosítva"})
   @ApiResponse({status: 400, description:"Hibásan megadott adatok"})
   update(@Param('id') id: string, @Body() updatePartDto: UpdatePartDto) {
