@@ -5,9 +5,9 @@ import { UsersService } from 'src/users/users.service';
 import * as argon2 from "argon2"
 import { users } from "generated/prisma/client"
 import { AuthGuard } from '@nestjs/passport'
-import { ApiExcludeController } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiExcludeController()
+@ApiTags("Autentikáció")
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService,
@@ -15,6 +15,11 @@ export class AuthController {
   ) {}
 
   @Post('login')
+  @ApiOperation({summary: "Bejelentkezés"})
+  @ApiBody({type: LoginDto})
+  @ApiResponse({status: 200, description: "Sikeres bejelentkezés"})
+  @ApiResponse({status: 400, description: "Hibás felhasználó név vagy jelszó"})
+  @ApiResponse({status: 404, description: "Felhasználó nem található"})
   async login(@Body() loginDto: LoginDto) {
     const user = await this.usersService.findByEmail(loginDto.userEmail)
     if (user === null) {
@@ -30,6 +35,8 @@ export class AuthController {
 
   @Get('me')
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
+  @ApiOperation({summary: "Felhasználó adatai (Csak bejelentkezett felhsználó láthatja)"})
   me(@Request() req) {
     const user = req.user as users
     return user

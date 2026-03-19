@@ -3,16 +3,17 @@ import { BrandsService } from './brands.service';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags("brands")
+@ApiTags("Márka")
 @Controller('brands')
 export class BrandsController {
   constructor(private readonly brandsService: BrandsService) {}
 
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Post()
-  @ApiOperation({summary: "Márka hozzáadása"})
+  @ApiOperation({summary: "Márka hozzáadása (Csak admin hozhat létre)"})
   @ApiBody({type: CreateBrandDto})
   @ApiResponse({status: 200, description: "Márka sikeresen létrehozva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
@@ -36,10 +37,10 @@ export class BrandsController {
   }
 
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({summary: "Márka módosítása"})
+  @ApiOperation({summary: "Márka módosítása (Csak admin módosíthat)"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: CreateBrandDto})
   @ApiResponse({status: 200, description: "Márka sikeresen módosítva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
   update(@Param('id') id: string, @Body() updateBrandDto: UpdateBrandDto) {
@@ -48,8 +49,9 @@ export class BrandsController {
 
   //This probalby shouldn't be used
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Delete(':id')
-  @ApiOperation({summary: "Márka törlése (Frontend álltal nem használt)"})
+  @ApiOperation({summary: "Márka törlése (Frontend álltal nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.brandsService.remove(+id);
   }

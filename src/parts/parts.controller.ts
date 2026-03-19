@@ -2,17 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { PartsService } from './parts.service';
 import { CreatePartDto } from './dto/create-part.dto';
 import { UpdatePartDto } from './dto/update-part.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-@ApiTags("parts")
+@ApiTags("Alkatrész")
 @Controller('parts')
 export class PartsController {
   constructor(private readonly partsService: PartsService) {}
 
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Post()
-  @ApiOperation({summary: "Alkatrész hozzáadása"})
+  @ApiOperation({summary: "Alkatrész hozzáadása (Csak admin hozhat létre)"})
   @ApiBody({type: CreatePartDto})
   @ApiResponse({status: 200, description:"Alkatrész sikeresen létrehozva"})
   @ApiResponse({status: 400, description:"Hibásan megadott adatok"})
@@ -36,10 +37,10 @@ export class PartsController {
   }
 
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({summary: "Alkatrész módosítása"})
+  @ApiOperation({summary: "Alkatrész módosítása (Csak admin módosíthat)"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: CreatePartDto})
   @ApiResponse({status: 200, description:"Alkatrész sikeresen módosítva"})
   @ApiResponse({status: 400, description:"Hibásan megadott adatok"})
   update(@Param('id') id: string, @Body() updatePartDto: UpdatePartDto) {
@@ -47,9 +48,10 @@ export class PartsController {
   }
 
   //This probably shouldn't be used
-  @UseGuards(AuthGuard('bearer'))
   @Delete(':id')
-  @ApiOperation({summary: "Alkatrész törlése (Frontend álltal nem használt)"})
+  @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
+  @ApiOperation({summary: "Alkatrész törlése (Frontend álltal nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.partsService.remove(+id);
   }

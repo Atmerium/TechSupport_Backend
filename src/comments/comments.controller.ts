@@ -2,17 +2,18 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@n
 import { CommentsService } from './comments.service';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 
-@ApiTags("comments")
+@ApiTags("Komment")
 @Controller('comments')
 export class CommentsController {
   constructor(private readonly commentsService: CommentsService) {}
 
   @UseGuards(AuthGuard("bearer"))
+  @ApiBearerAuth()
   @Post()
-  @ApiOperation({summary: "Komment hozzáadása"})
+  @ApiOperation({summary: "Komment hozzáadása (Csak bejelentkezett felhasználó kommentelhet)"})
   @ApiBody({type: CreateCommentDto})
   @ApiResponse({status: 200, description: "Komment sikeresen hozzáadva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
@@ -44,8 +45,10 @@ export class CommentsController {
     return this.commentsService.findByBuildId(+id);
   }
 
+  @UseGuards(AuthGuard("bearer"))
+  @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({summary: "Komment módosítása"})
+  @ApiOperation({summary: "Komment módosítása (Csak bejelentkezett felhasználó módosíthat)"})
   @ApiParam({name: "id", example: 1})
   @ApiResponse({status: 200, description: "Komment sikeresen módosítva"})
   @ApiResponse({status: 404, description: "Komment nem található"})
@@ -54,7 +57,9 @@ export class CommentsController {
   }
 
   @Delete(':id')
-  @ApiOperation({summary: "Komment törlése"})
+  @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
+  @ApiOperation({summary: "Komment törlése (Csak bejelentkezett felhasználó törölhet)"})
   @ApiParam({name: "id", example: 1})
   @ApiResponse({status: 200, description: "Komment sikeresen módosítva"})
   @ApiResponse({status: 404, description: "Komment nem található"})

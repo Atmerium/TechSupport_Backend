@@ -3,14 +3,13 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags("users")
+@ApiTags("Felhasználó")
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @UseGuards(AuthGuard('bearer'))
   @Post()
   @ApiOperation({summary: "Felhasználó felvétele"})
   @ApiBody({ type: CreateUserDto})
@@ -37,10 +36,10 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Patch(':id')
-  @ApiOperation({summary: "Felhasználó módosítása id alapján"})
+  @ApiOperation({summary: "Felhasználó módosítása id alapján (Csak bejelentkezett felhasználó)"})
   @ApiParam({name: "id", example: 1})
-  @ApiBody({type: CreateUserDto})
   @ApiResponse({status: 200, description: "Felhasználó sikeresen módosítva"})
   @ApiResponse({status: 400, description: "Hibásan megadott adatok"})
   @ApiResponse({status: 404, description: "Felhasználó nem található"})
@@ -50,8 +49,9 @@ export class UsersController {
 
   //This probably shouldn't be used
   @UseGuards(AuthGuard('bearer'))
+  @ApiBearerAuth()
   @Delete(':id')
-  @ApiOperation({summary: "Felhasználó törlése (Frontend álltal nem használt)"})
+  @ApiOperation({summary: "Felhasználó törlése (Frontend álltal nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
