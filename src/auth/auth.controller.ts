@@ -26,11 +26,11 @@ export class AuthController {
       user = await this.usersService.findByUserName(loginDto.userEmailName)
      
       if (user === null) {
-        throw new ForbiddenException('Invalid email/username or password')
+        throw new ForbiddenException('Invalid email/username')
       }
     }
     if (!(await argon2.verify(user.userPassword, loginDto.userPassword))) {
-      throw new ForbiddenException('Invalid email/username or password')
+      throw new ForbiddenException('Invalid password')
     }
     return {
       token: await this.usersService.createToken(user.userId)
