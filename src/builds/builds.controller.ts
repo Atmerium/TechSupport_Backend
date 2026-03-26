@@ -50,7 +50,7 @@ export class BuildsController {
   @Delete(':id')
   @UseGuards(AuthGuard('bearer'))
   @ApiBearerAuth()
-  @ApiOperation({summary: "Számítógép törlése (Frontend álltal nem használt, csak admin törölhet)"})
+  @ApiOperation({summary: "Számítógép törlése (Frontend által nem használt, csak admin törölhet)"})
   @ApiParam({name: "id", example: 1})
   @ApiResponse({status: 200, description: "Számítógép sikeresen törölve"})
   @ApiResponse({status: 404, description: "Számítógép nem található"})

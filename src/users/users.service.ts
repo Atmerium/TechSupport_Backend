@@ -33,7 +33,13 @@ export class UsersService {
 
   findByEmail(email: string) {
     return this.prisma.users.findUnique({
-      where: {userEmail: email},
+      where: {userEmail: email}
+    })
+  }
+
+  findByUserName(userName: string) {
+    return this.prisma.users.findUnique({
+      where: {userName: userName}
     })
   }
 

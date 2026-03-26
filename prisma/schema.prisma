@@ -20,6 +20,7 @@ model brands {
 
 model users {
   userId         Int        @id @default(autoincrement())
+  userName       String     @unique
   userEmail      String     @unique
   userPassword   String
   userRole       String     @default("user")

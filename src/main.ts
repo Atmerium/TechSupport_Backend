@@ -31,15 +31,16 @@ async function bootstrap() {
   }));
 
   const config = new DocumentBuilder()
-  .setTitle("TechSupport Categories API")
+  .setTitle("TechSupport Backend API")
   .setDescription("TechSupport backend NestJS + Prisma + Swagger")
-  .setVersion("0.6.0")
+  .setVersion("1.0.1")
   .addTag("Márka")
   .addTag("Alkatrész")
   .addTag("Felhasználó")
   .addTag("Autentikáció")
   .addTag("Összeállítás")
   .addTag("Komment")
+  .addBearerAuth()
   .build()
 
   const document = () => SwaggerModule.createDocument(app, config)

@@ -51,7 +51,7 @@ export class BrandsController {
   @UseGuards(AuthGuard('bearer'))
   @ApiBearerAuth()
   @Delete(':id')
-  @ApiOperation({summary: "Márka törlése (Frontend álltal nem használt, csak admin törölhet)"})
+  @ApiOperation({summary: "Márka törlése (Frontend által nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.brandsService.remove(+id);
   }

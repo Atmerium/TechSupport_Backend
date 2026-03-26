@@ -51,7 +51,7 @@ export class PartsController {
   @Delete(':id')
   @UseGuards(AuthGuard('bearer'))
   @ApiBearerAuth()
-  @ApiOperation({summary: "Alkatrész törlése (Frontend álltal nem használt, csak admin törölhet)"})
+  @ApiOperation({summary: "Alkatrész törlése (Frontend által nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.partsService.remove(+id);
   }

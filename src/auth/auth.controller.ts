@@ -5,7 +5,7 @@ import { UsersService } from 'src/users/users.service';
 import * as argon2 from "argon2"
 import { users } from "generated/prisma/client"
 import { AuthGuard } from '@nestjs/passport'
-import { ApiBearerAuth, ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags("Autentikáció")
 @Controller('auth')
@@ -21,12 +21,16 @@ export class AuthController {
   @ApiResponse({status: 400, description: "Hibás felhasználó név vagy jelszó"})
   @ApiResponse({status: 404, description: "Felhasználó nem található"})
   async login(@Body() loginDto: LoginDto) {
-    const user = await this.usersService.findByEmail(loginDto.userEmail)
+    let user = await this.usersService.findByEmail(loginDto.userEmailName)
     if (user === null) {
-      throw new ForbiddenException('Invalid email or password')
+      user = await this.usersService.findByUserName(loginDto.userEmailName)
+     
+      if (user === null) {
+        throw new ForbiddenException('Invalid email/username or password')
+      }
     }
     if (!(await argon2.verify(user.userPassword, loginDto.userPassword))) {
-      throw new ForbiddenException('Invalid email or password')
+      throw new ForbiddenException('Invalid email/username or password')
     }
     return {
       token: await this.usersService.createToken(user.userId)

@@ -51,7 +51,7 @@ export class UsersController {
   @UseGuards(AuthGuard('bearer'))
   @ApiBearerAuth()
   @Delete(':id')
-  @ApiOperation({summary: "Felhasználó törlése (Frontend álltal nem használt, csak admin törölhet)"})
+  @ApiOperation({summary: "Felhasználó törlése (Frontend által nem használt, csak admin törölhet)"})
   remove(@Param('id') id: string) {
     return this.usersService.remove(+id);
   }
