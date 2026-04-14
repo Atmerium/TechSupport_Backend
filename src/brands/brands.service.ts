@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { CreateBrandDto } from './dto/create-brand.dto';
 import { UpdateBrandDto } from './dto/update-brand.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -8,7 +8,7 @@ export class BrandsService {
   constructor(private prisma: PrismaService) {}
 
   create(createBrandDto: CreateBrandDto) {
-    return this.prisma.brands.create({data: createBrandDto});
+    return this.prisma.brands.create({ data: createBrandDto });
   }
 
   findAll() {
@@ -20,11 +20,14 @@ export class BrandsService {
   }
 
   update(id: number, updateBrandDto: UpdateBrandDto) {
-    return this.prisma.brands.update({where: {brandId: id}, data: updateBrandDto});
+    return this.prisma.brands.update({
+      where: { brandId: id },
+      data: updateBrandDto,
+    });
   }
 
   //This one probably shouldn't be used
   remove(id: number) {
-    return this.prisma.brands.delete({where: {brandId: id}});
+    return this.prisma.brands.delete({ where: { brandId: id } });
   }
 }
