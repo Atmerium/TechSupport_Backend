@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateBuildDto } from './dto/create-build.dto';
 import { UpdateBuildDto } from './dto/update-build.dto';
 import { PrismaService } from 'src/prisma.service';
@@ -14,16 +14,28 @@ export class BuildsService {
     return this.prisma.builds.findMany();
   }
 
-  findOne(id: number) {
-    return this.prisma.builds.findUnique({where: {buildId: id}});
+  async findOne(id: number) {
+    const res = await this.prisma.builds.findUnique({where: {buildId: id}});
+    if (!res) {
+      throw new NotFoundException()
+    }
+    return res
   }
 
-  update(id: number, updateBuildDto: UpdateBuildDto) {
+  async update(id: number, updateBuildDto: UpdateBuildDto) {
+    const res = await this.prisma.builds.findUnique({where: {buildId: id}});
+    if (!res) {
+      throw new NotFoundException()
+    }
     return this.prisma.builds.update({where: {buildId: id}, data: updateBuildDto});
   }
 
   // Shouldn't be used
-  remove(id: number) {
+  async remove(id: number) {
+    const res = await this.prisma.builds.findUnique({where: {buildId: id}});
+    if (!res) {
+      throw new NotFoundException()
+    }
     return this.prisma.builds.delete({where: {buildId: id}});
   }
 }
