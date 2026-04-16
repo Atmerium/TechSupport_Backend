@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Request, ForbiddenException, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Body, Request, ForbiddenException, UseGuards, Get, NotFoundException } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { UsersService } from 'src/users/users.service';
@@ -21,21 +21,26 @@ export class AuthController {
   @ApiResponse({status: 400, description: "Hibás felhasználó név vagy jelszó"})
   @ApiResponse({status: 404, description: "Felhasználó nem található"})
   async login(@Body() loginDto: LoginDto) {
-    let user = await this.usersService.findByEmail(loginDto.userEmailName)
-    if (user === null) {
-      user = await this.usersService.findByUserName(loginDto.userEmailName)
-     
-      if (user === null) {
-        throw new ForbiddenException('Invalid email/username')
+    let user;
+    try {
+      user = await this.usersService.findByEmail(loginDto.userEmailName);
+    } catch (e) {
+      try {
+        user = await this.usersService.findByUserName(loginDto.userEmailName);
+      } catch (e) {
+        throw new NotFoundException('Invalid email/username');
       }
     }
     if (!(await argon2.verify(user.userPassword, loginDto.userPassword))) {
-      throw new ForbiddenException('Invalid password')
+      throw new ForbiddenException('Invalid password');
     }
     return {
       token: await this.usersService.createToken(user.userId),
-      role: user.userRole
-    }
+      role: user.userRole,
+      userName: user.userName,
+      userEmail: user.userEmail,
+      userId: user.userId
+    };
   }
 
   @Get('me')
