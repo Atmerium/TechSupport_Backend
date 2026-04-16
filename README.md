@@ -25,10 +25,10 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Url for documentation
+## Url for API documentation
 
 ```bash
-# Api documentation
+# API documentation
 $ localhost:3000/api
 ```
 
