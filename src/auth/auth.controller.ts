@@ -35,6 +35,7 @@ export class AuthController {
       throw new ForbiddenException('Invalid password');
     }
     return {
+      id:user.userId,
       token: await this.usersService.createToken(user.userId),
       role: user.userRole,
       userName: user.userName,
