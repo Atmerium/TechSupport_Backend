@@ -18,7 +18,7 @@ const main = async () => {
         create: [
           {
             brandName: 'Intel',
-            brandDescription: 'Az Intel a "Core i" sorozattal határozza meg a piaci szinteket (i3, i5, i7, i9). A "K" a tuningot, az "F" a grafika hiányát jelzi.',
+            brandDescription: 'Az Intel a "Core i" sorozattal határozza meg a piaci szinteket (i3, i5, i7, i9). A proceszor név után a generáció száma jön, ami minnél nagyon annál erőssebb.  A "K" a tuningot, az "F" a grafika hiányát jelzi.',
           },
           {
             brandName: 'AMD',
@@ -54,7 +54,7 @@ const main = async () => {
         create: [
           {
             brandName: 'NVIDIA',
-            brandDescription: 'Az RTX széria és a DLSS technológia úttörője. A "Ti" és "Super" jelzések az erősebb változatokat takarják.',
+            brandDescription: 'Az RTX széria megalkotoja (20XX, 30XX, 40XX és a 50XX) és a DLSS technológia úttörője. A "Ti" és "Super" jelzések az erősebb változatokat takarják.',
           },
           {
             brandName: 'AMD Radeon',
@@ -149,11 +149,54 @@ const main = async () => {
     },
   ];
 
+  const FullPCData = [
+    {
+      buildName: 'Kezdő Office vagy otthoni összeállítás',
+      buildDescription: 'CPU: Intel Core i3-i5 8-12. generációs,\nGPU: belső integrált grafika,\nRAM: 8-16 GB DDR4,\nStorage: 256-512 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
+      buildVisible: true,
+    },
+    {
+      buildName: 'Középkategoriás Office vagy otthoni összeállítás',
+      buildDescription: 'CPU: Intel Core i7-i8 8-12. generációs,\nGPU: belső integrált grafika,\nRAM: 8-16 GB DDR4,\nStorage: 512-1024 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
+      buildVisible: true,
+    },
+    {
+      buildName: 'Prémium Office vagy otthoni összeállítás',
+      buildDescription: 'CPU: Intel Core i7-i9 10-14. generációs,\nGPU: NVIDIA RTX A2000,\nRAM: 8-16 GB DDR4,\nStorage: 1024-2048 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
+      buildVisible: true,
+    },
+    {
+      buildName: 'Belépő szintű Gamer összeállítás',
+      buildDescription: 'CPU: Intel Core i3-i5 12-14. generációs,\nGPU: NVIDIA RTX 3050 - 4060 vagy AMD RX 6600,\nRAM: 16 GB DDR4/DDR5,\nStorage: 512-1024 GB NVMe SSD,\nPSU: 550-600W 80 Plus Bronze/Gold,\nCase: ATX ház, jó légáramlással (mesh front).',
+      buildVisible: true,
+    },
+    {
+      buildName: 'Középkategóriás Gamer összeállítás',
+      buildDescription: 'CPU: Intel Core i5-i7 13-14. generációs,\nGPU: NVIDIA RTX 4060 Ti - 4070 Super,\nRAM: 16-32 GB DDR5,\nStorage: 1024-2048 GB NVMe Gen4 SSD,\nPSU: 650-750W 80 Plus Gold,\nCase: Prémium ATX ház, optimalizált hűtéssel.',
+      buildVisible: true,
+    },
+    {
+      buildName: 'High-End / Prémium Gamer összeállítás',
+      buildDescription: 'CPU: Intel Core i7-i9 14. generációs,\nGPU: NVIDIA RTX 4080 Super - 4090,\nRAM: 32-64 GB DDR5 (6000MHz+),\nStorage: 2048-4096 GB NVMe Gen4/Gen5 SSD,\nPSU: 850-1000W+ 80 Plus Gold/Platinum,\nCase: High-end toronyház, 360mm-es folyadékhűtéssel.',
+      buildVisible: true,
+    },
+  ]
+
   for (const item of fullData) {
     await prisma.parts.create({
       data: item,
     });
   }
+
+  
+  for (const item of FullPCData) {
+    await prisma.builds.create(
+      {
+        data: item,
+      }
+    )
+  }
+
   
 
   console.log('Kategóriák és márkák sikeresen létrehozva és összekapcsolva!');
