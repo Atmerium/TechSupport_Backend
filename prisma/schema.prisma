@@ -49,7 +49,7 @@ model builds {
   buildName        String
   buildDescription String?    @db.Text
   buildVisible     Boolean?   @default(true)
-  buildCategory    Int        @default(1)
+  buildCategory    Int?        @default(1)
   buildClass       Int?       @default(1)
   comments         comments[]
 }

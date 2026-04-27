@@ -154,31 +154,43 @@ const main = async () => {
       buildName: 'Kezdő Office vagy otthoni összeállítás',
       buildDescription: 'CPU: Intel Core i3-i5 8-12. generációs,\nGPU: belső integrált grafika,\nRAM: 8-16 GB DDR4,\nStorage: 256-512 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
       buildVisible: true,
+      buildCategory: 1,
+      buildClass: 1,
     },
     {
       buildName: 'Középkategoriás Office vagy otthoni összeállítás',
       buildDescription: 'CPU: Intel Core i7-i8 8-12. generációs,\nGPU: belső integrált grafika,\nRAM: 8-16 GB DDR4,\nStorage: 512-1024 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
       buildVisible: true,
+      buildCategory: 1,
+      buildClass: 2,
     },
     {
       buildName: 'Prémium Office vagy otthoni összeállítás',
       buildDescription: 'CPU: Intel Core i7-i9 10-14. generációs,\nGPU: NVIDIA RTX A2000,\nRAM: 8-16 GB DDR4,\nStorage: 1024-2048 GB NVMe SSD,\nPSU: 450-550W 80 Plus Bronze,\nCase: kompakt, jó légáramlású ház.',
       buildVisible: true,
+      buildCategory: 1,
+      buildClass: 3,
     },
     {
       buildName: 'Belépő szintű Gamer összeállítás',
       buildDescription: 'CPU: Intel Core i3-i5 12-14. generációs,\nGPU: NVIDIA RTX 3050 - 4060 vagy AMD RX 6600,\nRAM: 16 GB DDR4/DDR5,\nStorage: 512-1024 GB NVMe SSD,\nPSU: 550-600W 80 Plus Bronze/Gold,\nCase: ATX ház, jó légáramlással (mesh front).',
       buildVisible: true,
+      buildCategory: 2,
+      buildClass: 1,
     },
     {
       buildName: 'Középkategóriás Gamer összeállítás',
       buildDescription: 'CPU: Intel Core i5-i7 13-14. generációs,\nGPU: NVIDIA RTX 4060 Ti - 4070 Super,\nRAM: 16-32 GB DDR5,\nStorage: 1024-2048 GB NVMe Gen4 SSD,\nPSU: 650-750W 80 Plus Gold,\nCase: Prémium ATX ház, optimalizált hűtéssel.',
       buildVisible: true,
+      buildCategory: 2,
+      buildClass: 2,
     },
     {
       buildName: 'High-End / Prémium Gamer összeállítás',
       buildDescription: 'CPU: Intel Core i7-i9 14. generációs,\nGPU: NVIDIA RTX 4080 Super - 4090,\nRAM: 32-64 GB DDR5 (6000MHz+),\nStorage: 2048-4096 GB NVMe Gen4/Gen5 SSD,\nPSU: 850-1000W+ 80 Plus Gold/Platinum,\nCase: High-end toronyház, 360mm-es folyadékhűtéssel.',
       buildVisible: true,
+      buildCategory: 2,
+      buildClass: 3,
     },
   ]
 
